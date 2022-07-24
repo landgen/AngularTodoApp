@@ -1,7 +1,7 @@
 <div class="container">
   <nav class="row">
     <div class="nav-wrapper">
-      <span class="brand-logo center">Lista zadań</span>
+      <span class="brand-logo center">{{title}}</span>
     </div>
   </nav>
 
@@ -21,8 +21,8 @@
   </div>
 
   <ul class="collection">
-    <li class="collection-item row">
-      <span class="col s10">1 Siłownia - 11.07 czwartek</span>
+    <li class="collection-item row" *ngFor="let task of tasks">
+      <span class="col s10">{{task.name}}</span>
       <div class="col s2 right-align">
         <button class="btn-floating btn-small red">
           <i class="material-icons">remove</i>
@@ -44,8 +44,11 @@
   <footer class="page-footer mt-5">
     <div class="footer-copyright">
       <div class="container">
-        2020 © Lista zadań,All rights reserved.
+       {{ getFooter() }}
       </div>
+      <div>
+        {{ getAdditionalInfo | uppercase }} {{getDate| date: 'dd-MM-YYYY'}}
+       </div>
     </div>
   </footer>
 </div>
