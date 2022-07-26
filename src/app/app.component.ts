@@ -8,18 +8,38 @@ import { Task } from './task';
 })
 export class AppComponent {
   title = 'Lista Zadań:';
-  tasks: Task[] = [{
-    name: 'pływanie',
-    deadline: '2022-02-01',
-    done: false
-  }];
+  taskName!: string;
+  //config: { [key: string]: string | Date } = null;
+  tasks: Task[] = [
+    {
+      name: 'pływanie',
+      deadline: '2022-02-01',
+      done: false,
+    },
+  ];
   getFooter(): string {
-    return "2022 lista zadań"
+    return '2022 lista zadań';
   }
+  clearTasks() {
+    this.tasks = [];
+  };
   get getAdditionalInfo(): string {
     return 'Autor: Marcin Duda';
   }
   get getDate(): Date {
     return new Date();
+  }
+  onKeyUp(event: KeyboardEvent) {
+    const target = event.target as HTMLInputElement;
+    this.taskName = target.value;
+  }
+  createTask() {
+    const task: Task = {
+      name: this.taskName,
+      deadline: '2022-10-10',
+      done: false,
+      
+    };
+    this.tasks.push(task);
   }
 }
