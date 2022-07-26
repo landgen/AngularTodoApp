@@ -1,7 +1,7 @@
 <div class="container">
   <nav class="row">
     <div class="nav-wrapper">
-      <span class="brand-logo center">{{title}}</span>
+      <span class="brand-logo center">{{ title }}</span>
     </div>
   </nav>
 
@@ -12,18 +12,18 @@
 
   <div class="row">
     <input
+      #nameInput
       class="col s8"
       type="text"
-      placeholder="Dodaj zadanie i datę wykonania"
-      (keyup)="onKeyUp($event)"
-    />
-    <input class="col s2 disabled" type="date" />
-    <button class="btn-floating" (click)="createTask()">+</button>
+      placeholder="Dodaj zadanie i datę wykonania" />
+    <input class="col s2 disabled" type="date" #dateinput/>
+    <button class="btn-floating" (click)="createTask(nameInput.value, dateinput.value); nameInput.value=''; dateinput.value=''">+</button>
   </div>
 
   <ul class="collection">
     <li class="collection-item row" *ngFor="let task of tasks">
-      <span class="col s10">{{task.name}}</span>
+      <span class="col s10">{{ task.name }}</span>
+      <span class="col s10">{{ task.deadline }}</span>
       <div class="col s2 right-align">
         <button class="btn-floating btn-small red">
           <i class="material-icons">remove</i>
@@ -33,9 +33,9 @@
         </button>
       </div>
     </li>
-   <!--<li class="collection-item row">
+    <!--<li class="collection-item row">
       <span class="col done">Sprzątanie kuwet</span>
-    </li>--> 
+    </li>-->
   </ul>
 
   <h1>Dzisiaj brak zadań :-)</h1>
@@ -45,11 +45,11 @@
   <footer class="page-footer mt-5">
     <div class="footer-copyright">
       <div class="container">
-       {{ getFooter() }}
+        {{ getFooter() }}
       </div>
       <div>
-        {{ getAdditionalInfo | uppercase }} {{getDate| date: 'dd-MM-YYYY'}}
-       </div>
+        {{ getAdditionalInfo | uppercase }} {{ getDate | date: 'dd-MM-YYYY' }}
+      </div>
     </div>
   </footer>
 </div>
