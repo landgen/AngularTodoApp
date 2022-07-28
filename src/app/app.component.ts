@@ -8,7 +8,8 @@ import { Task } from './task';
 })
 export class AppComponent {
   title = 'Lista Zadań:';
-  taskName!: string;
+  taskName = 'dupa';
+  taskDate = '';
   //config: { [key: string]: string | Date } = null;
   tasks: Task[] = [
     {
@@ -22,24 +23,21 @@ export class AppComponent {
   }
   clearTasks() {
     this.tasks = [];
-  };
+  }
   get getAdditionalInfo(): string {
     return 'Autor: Marcin Duda';
   }
   get getDate(): Date {
     return new Date();
   }
-  onKeyUp(event: KeyboardEvent) {
-    const target = event.target as HTMLInputElement;
-    this.taskName = target.value;
-  }
   createTask() {
     const task: Task = {
       name: this.taskName,
-      deadline: '2022-10-10',
+      deadline: this.taskDate,
       done: false,
-      
     };
     this.tasks.push(task);
+    this.taskDate = '';
+    this.taskName = '';
   }
 }
