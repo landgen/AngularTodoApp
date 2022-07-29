@@ -10,7 +10,7 @@ export class AppComponent {
   title = 'Lista Zadań:';
   taskName = 'dupa';
   taskDate = '';
-  //config: { [key: string]: string | Date } = null;
+  config: { [key: string]: string } | null  = null;
   tasks: Task[] = [
     {
       name: 'pływanie',
@@ -18,6 +18,16 @@ export class AppComponent {
       done: false,
     },
   ];
+  constructor() {
+    setTimeout(() => {
+      this.config = {
+        title: 'Lista zadań',
+        footer: '© Lista zadań zbudowana w Angularze.',
+        date: new Date().toDateString(),
+      };
+    }, 500);
+    this.sortTasks();
+  }
   getFooter(): string {
     return '2022 lista zadań';
   }
@@ -39,5 +49,18 @@ export class AppComponent {
     this.tasks.push(task);
     this.taskDate = '';
     this.taskName = '';
+    this.sortTasks();
+  }
+  markTaskAsDone(task: Task) {
+    task.done = true;
+    this.sortTasks();
+  }
+  deleteTask(task: Task) {
+    this.tasks = this.tasks.filter(e => e != task);
+    this.sortTasks();
+  }
+  private sortTasks() {
+    this.tasks = this.tasks.sort((a: Task, b: Task) => 
+    a.done === b.done ? 0 : a.done? 1 : -1)
   }
 }
